@@ -23,12 +23,14 @@ export default function Navbar() {
         <nav className="bg-slate-50 text-[#222424] font-bold p-4 shadow-md z-10">
             <div className="container mx-auto flex justify-between items-center">
                 <span className="text-2xl font-bold">
+                <Link href="/">
                     <Image
                         src="/logo.png"
                         alt="Logo"
                         width={100}
                         height={50}
                     />
+                 </Link>
                 </span>
                 <button
                     onClick={() => setMenuOpen(!menuOpen)}
