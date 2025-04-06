@@ -1,9 +1,8 @@
 "use client";
 
+import { MoveRightIcon } from "lucide-react";
 import { useState } from "react";
-import { motion } from "framer-motion";
 
-// Type definitions for form data and error states
 interface FormData {
   fullName: string;
   email: string;
@@ -17,7 +16,7 @@ interface FormErrors {
   resume: string;
 }
 
-export default function Page() {
+export default function CareersPage() {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -31,32 +30,28 @@ export default function Page() {
     resume: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: files ? files[0] : null,
-    });
+    setFormData({ ...formData, [name]: files?.[0] ?? null });
   };
 
   const validateForm = (): boolean => {
     let valid = true;
     const newErrors: FormErrors = { fullName: "", email: "", resume: "" };
 
-    if (!formData.fullName) {
+    if (!formData.fullName.trim()) {
       newErrors.fullName = "Full name is required.";
       valid = false;
     }
 
-    if (!formData.email) {
+    if (!formData.email.trim()) {
       newErrors.email = "Email is required.";
       valid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -77,133 +72,113 @@ export default function Page() {
     e.preventDefault();
 
     if (validateForm()) {
-      // Handle form submission (e.g., send the form data to the server)
-      console.log("Form submitted successfully", formData);
+      console.log("Submitted:", formData);
+      alert("Application submitted successfully!");
+
+      setFormData({
+        fullName: "",
+        email: "",
+        resume: null,
+        coverLetter: "",
+      });
+      setErrors({ fullName: "", email: "", resume: "" });
     }
   };
 
   return (
-    <div className="min-h-screen text-[#222424] py-12 px-6">
-      {/* Header Section */}
-      <div className="relative mb-16">
-        <motion.h1
-          className="text-5xl font-extrabold text-center drop-shadow-lg z-10"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          Join Our Team
-        </motion.h1>
-        <div className="absolute inset-0 bg-cover bg-no-repeat bg-center opacity-20" style={{ backgroundImage: "url('https://source.unsplash.com/1600x900/?work,office')" }}></div>
-      </div>
+    <section className="py-10 px-4 bg-[#0f0f3e] text-[#222424] min-h-[calc(100vh-128px)] items-center justify-center flex">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Left Section */}
+        <div className="rounded-xl shadow-md p-6 md:p-10 flex flex-col justify-between">
+          <div className="flex items-center justify-center flex-col font-bold">
+            <h2 className="text-3xl font-bold mb-4 text-[#f9fbff]">Join Our Team</h2>
+            <p className="text-[#f9fbff] mb-6">
+              At HireTrix, we're always on the lookout for talented individuals
+              to join our dynamic team. We offer a range of opportunities across
+              various departments and roles.
+            </p>
+            <ul className="list-disc ml-6 text-[#f9fbff] space-y-2">
+              <li>Innovative and collaborative environment</li>
+              <li>Opportunities for growth and advancement</li>
+              <li>Supportive leadership and team culture</li>
+            </ul>
+            <p className="mt-4 text-[#f9fbff]">
+              Whether you're an experienced professional or just starting out,
+              we encourage you to apply!
+            </p>
+          </div>
+        </div>
 
-      {/* Career Introduction */}
-      <motion.div
-        className="mt-8 text-center max-w-3xl mx-auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-      >
-        <p className="text-lg opacity-80">
-          At HireTrix, we’re always on the lookout for talented individuals to join our dynamic team. We offer a range of opportunities across various departments and roles. Whether you're an experienced professional or just starting your career, we have the perfect position for you.
-        </p>
-        <p className="mt-4 text-lg opacity-80">
-          Browse through the available roles and apply by filling out the form below with your details and resume.
-        </p>
-      </motion.div>
+        {/* Right Section (Form) */}
+        <div className="bg-[#f9fbff] rounded-xl shadow-md p-6 md:p-10 flex items-center">
+          <form className="w-full space-y-4" onSubmit={handleSubmit}>
+            <h2 className="text-2xl font-bold mb-4">Apply Now</h2>
 
-      {/* Application Form Section */}
-      <motion.div
-        className="mt-12 max-w-3xl mx-auto bg-slate-50 p-8 rounded-xl shadow-lg text-[#222424] font-bold"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut", delay: 1 }}
-      >
-        <h2 className="text-2xl font-semibold text-center mb-6">Apply Now</h2>
-        <p className="text-center text-lg opacity-80 mb-6">
-          Fill out the form below and upload your resume to apply for the position that suits your skills and experience.
-        </p>
-
-        {/* Form for submitting details */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="flex flex-col space-y-4">
-            <div className="flex flex-col">
-              <label htmlFor="fullName" className="text-lg font-semibold text-[#222424]">
-                Full Name
-              </label>
+            <div>
               <input
-                id="fullName"
                 type="text"
                 name="fullName"
+                placeholder="Full Name"
                 value={formData.fullName}
                 onChange={handleChange}
-                placeholder="Enter your full name"
-                className={`px-4 py-3 border rounded-lg text-lg focus:outline-none ${errors.fullName ? "border-red-500 bg-red-50" : "border-[#e0e0e0] focus:ring-[#9900FA]"}`}
+                className="w-full px-4 py-2 border border-gray-300 rounded"
               />
-              {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
+              {errors.fullName && (
+                <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+              )}
             </div>
 
-            <div className="flex flex-col">
-              <label htmlFor="email" className="text-lg font-semibold text-[#222424]">
-                Email Address
-              </label>
+            <div>
               <input
-                id="email"
                 type="email"
                 name="email"
+                placeholder="Email Address"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your email address"
-                className={`px-4 py-3 border rounded-lg text-lg focus:outline-none ${errors.email ? "border-red-500 bg-red-50" : "border-[#e0e0e0] focus:ring-[#9900FA]"}`}
+                className="w-full px-4 py-2 border border-gray-300 rounded"
               />
-              {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
             </div>
 
-            <div className="flex flex-col">
-              <label htmlFor="resume" className="text-lg font-semibold text-[#222424]">
-                Upload Resume
-              </label>
+            <div>
               <input
-                id="resume"
                 type="file"
                 name="resume"
-                accept=".pdf, .doc, .docx"
+                accept=".pdf,.doc,.docx"
                 onChange={handleFileChange}
-                className={`px-4 py-3 border rounded-lg text-lg focus:outline-none ${errors.resume ? "border-red-500 bg-red-50" : "border-[#e0e0e0] focus:ring-[#9900FA]"}`}
+                className="w-full border border-gray-300 px-4 py-2 rounded"
               />
-              {errors.resume && <p className="text-red-500 text-sm">{errors.resume}</p>}
+              {errors.resume && (
+                <p className="text-red-500 text-sm mt-1">{errors.resume}</p>
+              )}
             </div>
 
-            <div className="flex flex-col">
-              <label htmlFor="coverLetter" className="text-lg font-semibold text-[#222424]">
-                Cover Letter (Optional)
-              </label>
+            <div>
               <textarea
-                id="coverLetter"
                 name="coverLetter"
-                rows={5}
+                rows={4}
+                placeholder="Cover Letter (optional)"
                 value={formData.coverLetter}
                 onChange={handleChange}
-                placeholder="Write a cover letter (optional)"
-                className="px-4 py-3 border rounded-lg text-lg focus:outline-none border-[#e0e0e0] focus:ring-[#9900FA]"
-              ></textarea>
+                className="w-full px-4 py-2 border border-gray-300 rounded resize-none"
+              />
             </div>
 
-            <div className="text-right">
-              <motion.button
-                type="submit"
-             className="px-3 py-1 bg-[#9900FA] text-white font-semibold rounded-lg shadow-lg hover:scale-105 transition-all"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: 1.3 }}
-              >
-                Submit Application
-              </motion.button>
-              
+            <div className="flex justify-end">
+
+              <button type="submit" className="group bg-gradient-to-r from-[#ed12b7] via-[#A020F0] to-[#9900FA] hover:opacity-90 transition-all duration-300 text-white px-6 py-3 rounded-md text-sm font-medium flex items-center gap-2 overflow-hidden">
+                Submit
+                <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-1">
+                  <MoveRightIcon className="w-4 h-4" />
+                </span>
+
+              </button>
             </div>
-          </div>
-        </form>
-      </motion.div>
-    </div>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 }
