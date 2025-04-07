@@ -10,7 +10,7 @@ const Hero = () => {
   const router = useRouter();
 
   const handleExploreClick = () => {
-    router.push("/services");
+    router.push("/services/hr");
   };
 
   return (
