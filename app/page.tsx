@@ -1,49 +1,56 @@
+"use client";
+
+import LocationsSection from "@/components/Locations";
+import StatsSection from "@/components/Stats";
+import WhoWeAreSection from "@/components/WhoWeAre";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-const HeroSection = () => {
+const Hero = () => {
+  const router = useRouter();
+
+  const handleExploreClick = () => {
+    router.push("/services");
+  };
+
   return (
-    <section className="bg-[#0f0f3e] text-white relative overflow-hidden grow">
-      <div className="w-full max-w-screen-xl mx-auto px-4 py-16 flex flex-col md:flex-row items-center md:items-stretch justify-between min-h-[calc(100vh-64px-64px)]">
-
-        {/* Left Text Section */}
-        <div className="max-w-xl z-10 w-full md:w-1/2 mb-10 md:mb-0 flex flex-col justify-center" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 fade-in-from-left">
+    <>
+    <section
+      className="relative overflow-hidden grow bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/hero_bg.jpeg')" }}
+    >
+      <div className="absolute inset-0 bg-linear-to-r from-[#1c41fd]/75 to-[#ffffff00]/100 z-0" />
+      <div className="relative z-10 w-full max-w-screen-xl mx-auto px-4 py-16 flex flex-col md:flex-row items-center justify-between min-h-[calc(100vh-64px-64px)]">
+        <div className="max-w-xl w-full md:w-1/2 mb-10 md:mb-0 flex flex-col justify-center text-white">
+        <h1
+            className="text-4xl md:text-5xl font-bold leading-tight mb-4 fade-in-from-bottom"
+            style={{ animationDelay: "0.1s", animationFillMode: "both" }}
+          >
             BEST INNOVATIVE <br /> SOLUTION
           </h1>
-          <p
-            className="text-gray-300 mb-8 text-lg fade-in-from-left"
-            style={{ animationDelay: "0.2s", animationFillMode: "both" }}
-          >
+
+          <p className="text-gray-200 mb-8 text-lg fade-in-from-bottom font-semibold"  style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
             YOUR MOST TRUSTED TECHNOLOGY PARTNERS
           </p>
-          <div className="flex items-center gap-6 fade-in-from-left" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
-            <button className="group bg-gradient-to-r from-[#ed12b7] via-[#A020F0] to-[#9900FA] hover:opacity-90 transition-all duration-300 text-white px-6 py-3 rounded-md text-sm font-medium flex items-center gap-2 overflow-hidden">
-              Explore More
-              <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-2">
-                {'>'}
+          <div className="flex items-center gap-4 fade-in-from-bottom" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
+            <button
+              onClick={handleExploreClick}
+              className="group bg-gradient-to-r from-[#0127fa] to-[#c309ec] hover:from-[#c309ec] hover:to-[#0127fa] text-white font-semibold px-7 py-3.5 rounded-[10px] shadow-[0px_3px_10px_rgba(75,75,75,0.36)] border-none transition-all duration-500"
+            >
+              Explore More{" "}
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-2 ml-2">
+                &gt;
               </span>
             </button>
           </div>
         </div>
-
-        {/* Right Image Section */}
-        <div className="w-full md:w-1/2 flex justify-center items-center fade-in-from-right" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
-          <div className="relative w-full h-64 sm:h-80 md:h-[400px] lg:h-[500px] xl:h-[600px]">
-            <Image
-              src="/landing_page_1.png"
-              alt="Hero Image"
-              fill
-              className="object-contain rounded-lg"
-              priority
-            />
-          </div>
-        </div>
-
-
-
       </div>
     </section>
+    <WhoWeAreSection/>
+    <StatsSection/>
+    <LocationsSection/>
+    </>
   );
 };
 
-export default HeroSection;
+export default Hero;

@@ -50,8 +50,8 @@ export default function Page() {
   ];
 
   return (
-    <div className="bg-[#0f0f3e] text-white py-12 px-6 min-h-[calc(100vh-64px-64px)]">
-      <h1 className="text-5xl font-extrabold text-center drop-shadow-lg mb-12">
+    <div className="bg-[#f4fbfd] py-12 px-6 min-h-[calc(100vh-64px-64px)] shadow-inner">
+      <h1 className="text-5xl font-extrabold text-center drop-shadow-lg mb-12 text-black">
         About Us
       </h1>
 
@@ -59,9 +59,9 @@ export default function Page() {
         {cardData.map((card, index) => (
           <div
             key={index}
-            className={`${
-              index % 2 === 0 ? "fade-in-from-right" : "fade-in-from-left"
-            } bg-white rounded-2xl p-6 text-center transition duration-300 ease-in-out hover:shadow-xl group hover:bg-gradient-to-br hover:from-[#ffffff] hover:via-[#ed12b7] hover:to-[#A020F0] hover:text-white`}
+            className={`${index % 2 === 0 ? "fade-in-from-right" : "fade-in-from-left"
+              } bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out border border-gray-100 group hover:bg-linear-to-b from-[#4f46e5] to-[#ae48ee]  hover:text-white`}
+
           >
             <div className="flex justify-center mb-4">
               <div

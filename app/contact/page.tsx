@@ -11,8 +11,9 @@ import {
   LinkedinIcon,
   InstagramIcon,
 } from "lucide-react";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { useForm } from "react-hook-form";
 
 type FormData = {
   user_name: string;
@@ -21,78 +22,29 @@ type FormData = {
 };
 
 export default function ContactUsPage() {
-  const [formData, setFormData] = useState<FormData>({
-    user_name: "",
-    user_email: "",
-    message: "",
-  });
+  const form = useRef<HTMLFormElement | null>(null);
 
-  const [errors, setErrors] = useState<any>({});
-  const form = useRef<HTMLFormElement | null>(null); // ✅ ref correctly declared here
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    setErrors((prev: any) => ({
-      ...prev,
-      [name]: "",
-    }));
-  };
-
-  const validate = (): boolean => {
-    const newErrors: any = {};
-
-    if (!formData.user_name.trim()) {
-      newErrors.user_name = "Name is required.";
-    }
-
-    if (!formData.user_email.trim()) {
-      newErrors.user_email = "Email is required.";
-    } else if (!/\S+@\S+\.\S+/.test(formData.user_email)) {
-      newErrors.user_email = "Email is invalid.";
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-
-    console.log("Env Keys:",
-        process.env
-      );
-
-      
-    e.preventDefault();
-    if (!validate()) return;
+  const onSubmit = () => {
+    if (!form.current) return;
 
     emailjs
       .sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        form.current!,
+        form.current,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       .then(
         () => {
           alert("Message sent successfully!");
-          setFormData({
-            user_name: "",
-            user_email: "",
-            message: "",
-          });
-          setErrors({});
+          reset();
         },
         (error) => {
           alert("Failed to send message. Please try again.");
@@ -102,11 +54,10 @@ export default function ContactUsPage() {
   };
 
   return (
-    <section className="py-10 bg-[#0f0f3e] text-[#222424] min-h-[calc(100vh-128px)] flex items-center justify-center">
-    <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-  
+    <section className="py-10 text-[#222424] min-h-[calc(100vh-128px)] flex items-center justify-center bg-[#f0f2f8]">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Section */}
-        <div className="bg-[#f9fbff] rounded-xl shadow-md p-6 md:p-10 flex flex-col justify-between">
+        <div className="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-6 md:p-10 mx-4 md:mx-0 flex flex-col justify-between fade-in-from-bottom">
           <div>
             <h2 className="text-3xl font-bold mb-4">Get In Touch With Us</h2>
             <p className="text-gray-600 mb-6 max-w-md">
@@ -180,22 +131,26 @@ export default function ContactUsPage() {
         </div>
 
         {/* Right Section (Form) */}
-        <div className="bg-[#f9fbff] rounded-xl shadow-md p-6 md:p-10 flex items-center">
-          <form ref={form} className="w-full space-y-4" onSubmit={handleSubmit}>
+        <div className="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-6 md:p-10 mx-4 md:mx-0 flex items-center fade-in-from-bottom">
+          <form
+            ref={form}
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-full space-y-4"
+          >
             <h2 className="text-2xl font-bold mb-4">Request a Quote</h2>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="w-full">
                 <input
                   type="text"
-                  name="user_name"
                   placeholder="Name"
-                  value={formData.user_name}
-                  onChange={handleChange}
+                  {...register("user_name", { required: "Name is required." })}
                   className="w-full px-4 py-2 border border-gray-300 rounded"
                 />
                 {errors.user_name && (
-                  <p className="text-red-500 text-sm mt-1">{errors.user_name}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.user_name.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -203,38 +158,44 @@ export default function ContactUsPage() {
             <div>
               <input
                 type="email"
-                name="user_email"
                 placeholder="Email Address"
-                value={formData.user_email}
-                onChange={handleChange}
+                {...register("user_email", {
+                  required: "Email is required.",
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Email is invalid.",
+                  },
+                })}
                 className="w-full px-4 py-2 border border-gray-300 rounded"
               />
               {errors.user_email && (
-                <p className="text-red-500 text-sm mt-1">{errors.user_email}</p>
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.user_email.message}
+                </p>
               )}
             </div>
 
             <div>
               <textarea
-                name="message"
                 rows={4}
                 placeholder="Message"
-                value={formData.message}
-                onChange={handleChange}
+                {...register("message", { required: "Message is required." })}
                 className="w-full px-4 py-2 border border-gray-300 rounded resize-none"
               />
               {errors.message && (
-                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.message.message}
+                </p>
               )}
             </div>
 
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="bg-gradient-to-r from-[#ed12b7] via-[#A020F0] to-[#9900FA] text-white px-6 py-3 rounded-md text-sm font-medium flex gap-2 transition-all duration-300 hover:opacity-90 group items-center"
+                className="group bg-gradient-to-r from-[#0127fa] to-[#c309ec] hover:from-[#c309ec] hover:to-[#0127fa] text-white px-6 py-2.5 rounded-md font-medium shadow-md hover:opacity-90 transition"
               >
                 Send
-                <span className="inline-block transform transition-transform duration-300 group-hover:translate-x-1">
+                <span className="inline-block ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
                   <SendHorizonal size={18} />
                 </span>
               </button>

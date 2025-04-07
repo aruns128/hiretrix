@@ -5,7 +5,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #f1f1f1;
+  background-color: #f4fbfd;
 }
 
 /* Hide default scrollbar */
@@ -50,10 +50,30 @@ html, body {
   }
 }
 
+@keyframes fadeInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-from-bottom {
+  animation: fadeInFromBottom 0.8s ease-out forwards;
+}
+
+
 .fade-in-from-left {
   animation: fadeInFromLeft 0.8s ease-out forwards;
 }
 
 .fade-in-from-right {
   animation: fadeInFromRight 0.8s ease-out forwards;
+}
+
+.primary-gradient{
+  background-color: linear-gradient(90deg, #0045ff 0%, #bd29f2 100%);
 }
