@@ -5,8 +5,8 @@ import Link from "next/link";
 import {
     Smartphone,
     Laptop,
-    Paintbrush,
     HeadsetIcon,
+    MonitorCog,
   } from "lucide-react";
   
   const services = [
@@ -28,7 +28,7 @@ import {
       title: "UI/UX Design Services",
       description:
         "We deliver visually stunning and user-centric UI/UX designs that enhance usability and engagement. Our process ensures your app or site feels intuitive and delightful to users.",
-      icon: <Paintbrush className="text-3xl" />,
+      icon: <MonitorCog className="text-3xl" />,
       iconBg: "from-[#DC2626] to-[#F87171]", // red gradient
     },
   ];

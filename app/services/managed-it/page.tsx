@@ -57,7 +57,7 @@ export default function ServicesPage() {
         HireTrix provides end-to-end Managed IT Support services to help businesses stay focused on their core operations. Our expert team handles everything from system monitoring, IT infrastructure management, to proactive issue resolution—ensuring high uptime, enhanced security, and optimal performance across your digital assets.
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {services.map((card, index) => (
           <div
             key={index}

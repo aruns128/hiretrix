@@ -4,8 +4,8 @@ import {
   UserCheck,
   Briefcase,
   HeadsetIcon,
-  Banknote,
   ShieldCheck,
+  IndianRupee,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -26,14 +26,14 @@ const services = [
     description:
       "We provide skill-based training and job placement support for freshers and experienced professionals. Our programs ensure candidates are industry-ready and matched to relevant opportunities.",
     icon: <Briefcase className="text-3xl" />,
-    iconBg: "from-[#059669] to-[#34D399]", // green gradient
+    iconBg: "from-[#0EA5E9] to-[#38BDF8]", // cyan gradient
   },
   {
     title: "Payroll Services",
     description:
       "Our payroll services are designed to simplify salary processing, tax calculations, and compliance. We handle accurate and timely disbursement while maintaining confidentiality and legal adherence.",
-    icon: <Banknote className="text-3xl" />,
-    iconBg: "from-[#0EA5E9] to-[#38BDF8]", // cyan gradient
+    icon: <IndianRupee className="text-3xl" />,
+    iconBg: "from-[#059669] to-[#34D399]", // green gradient
   },
   {
     title: "POSH Training",
@@ -56,7 +56,7 @@ export default function ServicesPage() {
         HireTrix offers comprehensive HR services designed to streamline your human resource functions. From Recruitment and Staffing to Training & Placement, Payroll Management, and POSH Training — we ensure your organization runs smoothly with a skilled, compliant, and motivated workforce.
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {services.map((card, index) => (
           <div
             key={index}

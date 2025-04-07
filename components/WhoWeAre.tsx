@@ -52,7 +52,7 @@ const WhoWeAreSection = () => {
     }, [hasAnimated]);
 
     return (
-        <section className="bg-[#f4fbfd] py-24 px-4" ref={sectionRef}>
+        <section className="bg-[#f4fbfd] py-24 px-4" ref={sectionRef} id="who-we-are">
             <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center gap-14 md:gap-24">
                 {/* Left side */}
                 <div className="relative w-full md:w-1/2 flex justify-center items-start md:items-center fade-in-from-bottom" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
@@ -83,7 +83,7 @@ const WhoWeAreSection = () => {
                     >
                         <div className="bg-white rounded-lg overflow-hidden">
                             <Image
-                                src="/office.webp"
+                                src="/office.jpg"
                                 alt="Office"
                                 width={220}
                                 height={190}

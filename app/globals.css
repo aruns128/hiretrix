@@ -6,7 +6,9 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: #f4fbfd;
+  scroll-behavior: smooth;
 }
+
 
 /* Hide default scrollbar */
 ::-webkit-scrollbar {

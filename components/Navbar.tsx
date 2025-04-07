@@ -59,7 +59,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center px-4 py-3">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold flex items-center gap-2">
-          <Image src="/logo.png" alt="Logo" width={200} height={100} priority />
+          <Image src="/logo.png" alt="Logo" width={150} height={75} priority />
         </Link>
 
         {/* Mobile Menu Toggle */}

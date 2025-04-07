@@ -59,7 +59,7 @@ export default function ServicesPage() {
                     At HireTrix, our ISMS services help organizations establish and maintain a systematic approach to managing sensitive company information, ensuring confidentiality, integrity, and availability. We assist in implementing ISO 27001 standards, risk assessments, and continuous compliance practices tailored to your industry.
                 </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 {services.map((card, index) => (
                     <div
                         key={index}

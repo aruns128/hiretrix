@@ -5,17 +5,17 @@ import Image from "next/image";
 const locations = [
     {
         name: "India",
-        code: "in",
+        code: "location_1.webp",
         description: "Contrary to popular belief, Lorem Ipsum is not simply random",
     },
     {
         name: "United States",
-        code: "us",
+        code: "location_2.webp",
         description: "Contrary to popular belief, Lorem Ipsum is not simply random",
     },
     {
         name: "Canada",
-        code: "ca",
+        code: "location_3.webp",
         description: "Contrary to popular belief, Lorem Ipsum is not simply random",
     },
 
@@ -36,9 +36,9 @@ const LocationsSection = () => {
                             className="bg-white rounded-xl shadow-md overflow-hidden transition-transform hover:scale-105 duration-300"
                         >
                             <img
-                                src={`https://flagcdn.com/w320/${location.code}.png`}
+                                src={`/${location.code}`}
                                 alt={location.name}
-                                className="w-full h-48 object-contain p-4"
+                                className="w-full object-fit"
                                 loading="lazy"
                             />
 

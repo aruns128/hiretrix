@@ -3,16 +3,9 @@
 import LocationsSection from "@/components/Locations";
 import StatsSection from "@/components/Stats";
 import WhoWeAreSection from "@/components/WhoWeAre";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 const Hero = () => {
-  const router = useRouter();
-
-  const handleExploreClick = () => {
-    router.push("/services/hr");
-  };
-
+ 
   return (
     <>
     <section
@@ -33,15 +26,15 @@ const Hero = () => {
             YOUR MOST TRUSTED TECHNOLOGY PARTNERS
           </p>
           <div className="flex items-center gap-4 fade-in-from-bottom" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
-            <button
-              onClick={handleExploreClick}
+            <a
+              href="#who-we-are"
               className="group bg-gradient-to-r from-[#0127fa] to-[#c309ec] hover:from-[#c309ec] hover:to-[#0127fa] text-white font-semibold px-7 py-3.5 rounded-[10px] shadow-[0px_3px_10px_rgba(75,75,75,0.36)] border-none transition-all duration-500"
             >
               Explore More{" "}
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-2 ml-2">
                 &gt;
               </span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

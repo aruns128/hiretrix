@@ -189,7 +189,7 @@ const CareerPage = () => {
     {/* Background Image */}
     <div className="absolute inset-0">
       <img
-        src="/office.webp" // ✅ Replace with your actual image path
+        src="/office.jpg" // ✅ Replace with your actual image path
         alt="Office"
         className="w-full h-full object-cover"
       />
