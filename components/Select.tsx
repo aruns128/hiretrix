@@ -2,9 +2,15 @@
 import { useState } from "react";
 import { ChevronDown, Check } from "lucide-react";
 
+// Define the props type
+interface GradientSelectProps {
+  selected: string;
+  setSelected: (value: string) => void;
+}
+
 const jobTypes = ["All", "Full Time", "Part Time", "Contract", "Freelance"];
 
-export default function GradientSelect({ selected, setSelected }) {
+export default function GradientSelect({ selected, setSelected }: GradientSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

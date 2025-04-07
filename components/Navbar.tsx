@@ -96,9 +96,8 @@ export default function Navbar() {
                     onClick={() =>
                       setDropdownOpenLabel(dropdownOpenLabel === label ? null : label)
                     }
-                    className={`flex items-center gap-1 text-base transition-colors duration-300 ${
-                      isActive ? "text-[#0045ff]" : "hover:text-[#f3336b]"
-                    }`}
+                    className={`flex items-center gap-1 text-base transition-colors duration-300 ${isActive ? "text-[#0045ff]" : "hover:text-[#f3336b]"
+                      }`}
                   >
                     {label}
                     <ChevronDown size={14} />
@@ -128,19 +127,23 @@ export default function Navbar() {
               return (
                 <li
                   key={href}
-                  className={`px-2 py-1 text-base transition-colors duration-300 ${
-                    isActive ? "text-[#0045ff]" : "hover:text-[#f3336b]"
-                  }`}
+                  className={`px-2 py-1 text-base transition-colors duration-300 ${isActive ? "text-[#0045ff]" : "hover:text-[#f3336b]"
+                    }`}
                 >
-                  <Link
-                    href={href}
-                    onClick={() => {
-                      setMenuOpen(false);
-                      setDropdownOpenLabel(null);
-                    }}
-                  >
-                    {label}
-                  </Link>
+                  {href ? (
+                    <Link
+                      href={href}
+                      onClick={() => {
+                        setMenuOpen(false);
+                        setDropdownOpenLabel(null);
+                      }}
+                    >
+                      {label}
+                    </Link>
+                  ) : (
+                    <span className="cursor-default">{label}</span>
+                  )}
+
                 </li>
               );
             }
