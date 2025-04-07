@@ -192,14 +192,15 @@ export default function ContactUsPage() {
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="group bg-gradient-to-r from-[#0127fa] to-[#c309ec] hover:from-[#c309ec] hover:to-[#0127fa] text-white px-6 py-2.5 rounded-md font-medium shadow-md hover:opacity-90 transition"
+                className="group bg-gradient-to-r from-[#0127fa] to-[#c309ec] hover:from-[#c309ec] hover:to-[#0127fa] text-white px-6 py-2.5 rounded-md font-medium shadow-md hover:opacity-90 transition flex items-center"
               >
                 Send
-                <span className="inline-block ml-2 transform transition-transform duration-300 group-hover:translate-x-1">
+                <span className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1 flex items-center">
                   <SendHorizonal size={18} />
                 </span>
               </button>
             </div>
+
           </form>
         </div>
       </div>
