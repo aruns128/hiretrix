@@ -14,7 +14,7 @@ const locations = [
         description: "Contrary to popular belief, Lorem Ipsum is not simply random",
     },
     {
-        name: "Canada",
+        name: "UAE",
         code: "location_3.webp",
         description: "Contrary to popular belief, Lorem Ipsum is not simply random",
     },
